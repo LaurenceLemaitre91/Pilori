@@ -24,7 +24,7 @@ class Website {
     this.device = config.device;
     this.level = config.level;
   }
-  
+
   get id() {
     return this.#id;
   }
@@ -52,7 +52,7 @@ class Website {
   get level() {
     return this.#level;
   }
-  
+
   set id(value) {
     if (typeof value !== 'number' && typeof value !== 'undefined') {
       throw new Error('Id incorrect');
@@ -106,10 +106,10 @@ class Website {
       INSERT INTO website ("title", "slug", "description", "address", "device", "level")
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING id;
-    `; 
+    `;
     const values = [this.title, this.slug, this.description, this.address, this.device, this.level];
     const result = await client.query(text, values);
-    this.#id = result.rows[0].id; 
+    this.#id = result.rows[0].id;
   }
 
   static async read(id) {
@@ -125,6 +125,18 @@ class Website {
     else {
       throw new Error('Website non trouvé');
     }
+  }
+  static async readID() {
+    const text = await client.query(`SELECT * FROM website ORDER BY id DESC LIMIT 3`);
+    console.log(text);
+    const websiteRows = text.rows;
+    const websitesObj = [];
+    // Pour chaque site contenu dans la bdd
+    for (const websiteRow of websiteRows) {
+      // J'instancie un nouvel objet grace a ma classe
+      websitesObj.push(new Website(websiteRow));
+    }
+    return websitesObj;
   }
 
   async update() {
