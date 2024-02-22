@@ -17,6 +17,7 @@ router.get('/contact', mainController.contact);
 
 router.get('/tomates', websiteController.all);
 router.get('/tomates/denoncer', websiteController.form);
+// route menant à l'action du formulaire 
 router.post('/tomates/denoncer', websiteController.formAction);
 //Route menant au détails d'un site
 router.get('/tomates/:slug', websiteController.details);

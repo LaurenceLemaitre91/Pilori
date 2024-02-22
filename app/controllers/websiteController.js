@@ -40,10 +40,15 @@ const websiteController = {
     try {
       const website = new Website(req.body);
       // todo : c'est bien beau de créer un objet représentant le site, il faudrait aussi le faire persister en base de données
+       const updateSite = await website.create();
+       console.log(updateSite);
       res.redirect('/tomates/' + website.slug);
+      res.render('add-site', {
+        website: updateSite
+      })
     } catch (error) {
       res.render('add-site', {
-        message: error.message,
+        message: error.message
       });
     }
   },
