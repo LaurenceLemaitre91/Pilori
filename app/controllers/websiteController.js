@@ -49,11 +49,18 @@ const websiteController = {
   },
 
   details: async function(req, res, next) {
+     // Récupérer le slug à partir des paramètres de la requête
+     const slug = req.params.slug;
+    const recupSlug = await Website.slugAff(slug);
+    // Afficher le résultat dans la console
+    console.log(recupSlug);
+
     res.render('detail', {
-      website: {},
+      website: recupSlug
+      
     });
   },
 
 };
 
-export default websiteController;
+export default websiteController

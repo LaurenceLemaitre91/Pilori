@@ -3,10 +3,8 @@ import Website from "../models/Website.js";
 const mainController = {
 
   home: async function (req, res) {
-
     // Utilisation de readId() pour récupérer toutes les entrées de la base de données
     const websites = await Website.readID();
-
     res.render('home', {
       // Passage des données récupérées à la vue
       websites: websites
