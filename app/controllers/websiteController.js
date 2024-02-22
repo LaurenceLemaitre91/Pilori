@@ -53,8 +53,6 @@ const websiteController = {
      const slug = req.params.slug;
     const recupSlug = await Website.slugAff(slug);
     // Afficher le résultat dans la console
-    console.log(recupSlug);
-
     res.render('detail', {
       website: recupSlug
       

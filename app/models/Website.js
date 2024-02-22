@@ -140,14 +140,16 @@ class Website {
   }
 
 static async slugAff(slug){
-const text = `SELECT * FROM website WHERE "slug" = $1`;
-const values = [slug];
-const result = await client.query(text, values);
-console.log(result);
-if(result.rows.length>0) {
-return new Website(result.rows[0]);
-} else {
-  throw new Error('Website non trouvé');
+try{
+    const text = `SELECT * FROM website WHERE "slug" = $1`;
+    const values = [slug];
+    const result = await client.query(text, values);
+    if(result.rows.length>0) {
+    return new Website(result.rows[0]);
+    } 
+  } catch (error){
+  console.log(error);
+  res.render('error',message='Site non trouvé');
 }
 }
 
