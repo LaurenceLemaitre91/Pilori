@@ -45,17 +45,17 @@ class User {
     }
     this.#hash = value;
   }
-
   async create() {
     const text = `
-      INSERT INTO "user" ("email", "hash")
-      VALUES ($1, $2)
+      INSERT INTO "user" ("email","hash")
+      VALUES ($1,$2)
       RETURNING id;
-    `; 
-    const values = [this.email, this.hash];
+    `;
+    const values = [this.email,this.hash];
     const result = await client.query(text, values);
-    this.#id = result.rows[0].id; 
+    this.#id = result.rows[0].id;
   }
+
 
   static async read(id) {
     const text = `
@@ -80,7 +80,7 @@ class User {
         "hash" = $2
       WHERE id = $3;
     `;
-    const values = [this.emaill, this.hash, this.id];
+    const values = [this.email, this.hash, this.id];
     client.query(text, values);
   }
 

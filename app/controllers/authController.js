@@ -13,6 +13,7 @@ const authController = {
     try {
       // on cherche un user par son email
       const foundUser = await client.query('SELECT * FROM "user" WHERE "email" = $1', [req.body.email]);
+   
       if (foundUser.rowCount > 0) {
         const user = foundUser.rows[0];
         // si on a trouvé on check le mot de passe, à noter qu'on a utilisé la syntaxe async await avec bcrypt, bien plus sympa

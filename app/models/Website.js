@@ -169,6 +169,9 @@ try{
     client.query(text, values);
   }
 
+  async updateUserID(){
+    client.query('UPDATE website SET user_id = $1 WHERE id =$2'), [userId,this.id]
+  }
   async delete() {
     const text = `
       DELETE FROM website 

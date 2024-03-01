@@ -41,6 +41,9 @@ const websiteController = {
       const website = new Website(req.body);
       // todo : c'est bien beau de créer un objet représentant le site, il faudrait aussi le faire persister en base de données
        const updateSite = await website.create();
+       if (req.session.isLogged){
+        await Website.updateUserId(req.session.updateUserId)
+       }
        console.log(updateSite);
       res.redirect('/tomates/' + website.slug);
       res.render('add-site', {

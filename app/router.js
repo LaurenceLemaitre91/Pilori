@@ -23,6 +23,7 @@ router.post('/tomates/denoncer', websiteController.formAction);
 router.get('/tomates/:slug', websiteController.details);
 
 router.get('/connexion', authController.login);
+// Création du compte utilisateur
 router.post('/connexion', authController.loginAction);
 router.get('/inscription', authController.signup);
 router.post('/inscription', authController.signupAction);
