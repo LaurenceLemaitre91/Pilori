@@ -40,20 +40,33 @@ const websiteController = {
     try {
       const website = new Website(req.body);
       // todo : c'est bien beau de créer un objet représentant le site, il faudrait aussi le faire persister en base de données
+       const updateSite = await website.create();
+       if (req.session.isLogged){
+        await Website.updateUserId(req.session.updateUserId)
+       }
+       console.log(updateSite);
       res.redirect('/tomates/' + website.slug);
+      res.render('add-site', {
+        website: updateSite
+      })
     } catch (error) {
       res.render('add-site', {
-        message: error.message,
+        message: error.message
       });
     }
   },
 
   details: async function(req, res, next) {
+     // Récupérer le slug à partir des paramètres de la requête
+     const slug = req.params.slug;
+    const recupSlug = await Website.slugAff(slug);
+    // Afficher le résultat dans la console
     res.render('detail', {
-      website: {},
+      website: recupSlug
+      
     });
   },
 
 };
 
-export default websiteController;
+export default websiteController

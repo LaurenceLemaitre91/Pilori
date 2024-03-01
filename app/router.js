@@ -9,16 +9,21 @@ const router = express.Router();
 
 router.get('/', mainController.home);
 
+
+
 router.get('/mentions-legales', mainController.legals);
 router.get('/plan', mainController.plan);
 router.get('/contact', mainController.contact);
 
 router.get('/tomates', websiteController.all);
 router.get('/tomates/denoncer', websiteController.form);
+// route menant à l'action du formulaire 
 router.post('/tomates/denoncer', websiteController.formAction);
+//Route menant au détails d'un site
 router.get('/tomates/:slug', websiteController.details);
 
 router.get('/connexion', authController.login);
+// Création du compte utilisateur
 router.post('/connexion', authController.loginAction);
 router.get('/inscription', authController.signup);
 router.post('/inscription', authController.signupAction);
